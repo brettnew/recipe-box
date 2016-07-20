@@ -21,7 +21,7 @@
     <br>
   <select id="tag_id" name="tag_id">
     <% @tags.each() do |tag| %>
-      <option value="<%= tag.id() %>"><%= tag.name() %></option>
+      <option value="<%= tag.id() %>"><%= tag.description() %></option>
     <% end %>
   </select>
   <button type="submit">Submit</button>

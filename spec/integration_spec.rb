@@ -16,4 +16,17 @@ describe('recipe functionality through application', {:type => :feature}) do
     click_link('Caesar Salad')
     expect(page).to have_content('Recipe: Caesar Salad')
   end
+
+  it('allows a user to associate a tag with a recipe') do
+    visit('/tags')
+    fill_in('tag_description', :with => "salad")
+    click_button('Add Tag')
+    click_link('View Recipes')
+    fill_in('recipe_name', :with => "Ceasar Salad")
+    click_button('Add Recipe')
+    click_link('Ceaser Salad')
+    select("salad", :from => "tag_id")
+    click_button("Submit")
+    expect(page).to have_content('salad')
+  end
 end
