@@ -17,7 +17,7 @@
 <form id="update_tag_id" action="/recipes/<%= @recipe.id() %>" method="post">
   <input name="_method" type="hidden" value="patch">
   <input type="hidden" name="recipe_id" id="recipe_id" value="<%= @recipe.id() %>">
-  <label for="tag_select">Select the Recipe:  </label>
+  <label for="recipe_select">Select the Recipe:  </label>
     <br>
   <select id="tag_id" name="tag_id">
     <% @tags.each() do |tag| %>

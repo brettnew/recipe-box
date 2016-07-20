@@ -36,9 +36,36 @@ get("/recipes/:id") do
   erb(:recipe)
 end
 
+get("/tags/:id") do
+  @tag = Tag.find(params.fetch("id").to_i())
+  @recipes = Recipe.all
+  erb(:tag)
+end
+
 patch("/recipes/:id") do
   tag = Tag.find(params.fetch("tag_id").to_i())
   @recipe = Recipe.find(params.fetch("id").to_i())
   @recipe.tags.push(tag)
   redirect back
+end
+
+patch("/tags/:id") do
+  recipe = Recipe.find(params.fetch("recipe_id").to_i())
+  @tag = Tag.find(params.fetch("id").to_i())
+  @tag.recipes.push(recipe)
+  redirect back
+end
+
+
+
+
+
+get("/clear") do
+  Tag.all().each() do |tag|
+    tag.destroy()
+  end
+  Recipe.all().each() do |recipe|
+    recipe.destroy()
+  end
+  redirect("/")
 end

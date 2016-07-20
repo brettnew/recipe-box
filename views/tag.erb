@@ -1,0 +1,28 @@
+<h2>Tag: <%= @tag.description() %></h2>
+<hr>
+<h3>Recipes for this Tag:</h3>
+<ul>
+<% if @tag.recipes.each() do |recipe| %>
+ <li><a href="/recipes/<%= recipe.id() %>"></a> <%= recipe.name %> </li>
+<% end %>
+</ul>
+
+<% else %>
+    <p><strong>Tag does not have recipes.</strong></p>
+    <br>
+    <p><a href="/recipes">Add a recipe to the database</a></p>
+<% end %>
+
+<h4>Assign tag to a recipe:</h4>
+<form id="update_recipe_id" action="/tags/<%= @tag.id() %>" method="post">
+  <input name="_method" type="hidden" value="patch">
+  <input type="hidden" name="tag_id" id="tag_id" value="<%= @tag.id() %>">
+  <label for="tag_select">Select the Tag:  </label>
+    <br>
+  <select id="recipe_id" name="recipe_id">
+    <% @recipes.each() do |recipe| %>
+      <option value="<%= recipe.id() %>"><%= recipe.name() %></option>
+    <% end %>
+  </select>
+  <button type="submit">Submit</button>
+</form>
