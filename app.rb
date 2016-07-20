@@ -18,6 +18,11 @@ get("/tags") do
   erb(:tags)
 end
 
+get('/ingredients') do
+  @ingredients = Ingredient.all()
+  erb(:ingredients)
+end
+
 post("/recipes") do
   name = params.fetch("recipe_name")
   Recipe.create({:name => name})
@@ -26,13 +31,20 @@ end
 
 post("/tags") do
   description = params.fetch("tag_description")
-  Tag.create(({:description => description}))
+  Tag.create({:description => description})
   redirect("/tags")
+end
+
+post("/ingredients") do
+  name = params.fetch("ingredient_name")
+  Ingredient.create({:name => name})
+  redirect('/ingredients')
 end
 
 get("/recipes/:id") do
   @recipe = Recipe.find(params.fetch("id").to_i())
   @tags = Tag.all()
+  @ingredients = Ingredient.all()
   erb(:recipe)
 end
 
@@ -40,6 +52,19 @@ get("/tags/:id") do
   @tag = Tag.find(params.fetch("id").to_i())
   @recipes = Recipe.all
   erb(:tag)
+end
+
+get('/ingredients/id') do
+  @ingredient = Ingredient.find(params.fetch("id").to_i())
+  @recipes = Recipe.all()
+  erb(:recipe)
+end
+
+patch("/recipes/:id/ingredient") do
+  ingredient = Ingredient.find(params.fetch("ingredient_id").to_i())
+  @recipe = Recipe.find(params.fetch("id").to_i())
+  @recipe.ingredients.push(ingredient)
+  redirect back
 end
 
 patch("/recipes/:id") do
@@ -60,12 +85,16 @@ end
 
 
 
+
 get("/clear") do
   Tag.all().each() do |tag|
     tag.destroy()
   end
   Recipe.all().each() do |recipe|
     recipe.destroy()
+  end
+  Ingredient.all().each() do |ingredient|
+    ingredient.destroy()
   end
   redirect("/")
 end

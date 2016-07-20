@@ -1,12 +1,39 @@
 <h2>Recipe: <%= @recipe.name() %></h2>
 <hr>
+<h3>Ingredients for this Recipe:</h3>
+<% if @recipe.ingredients.any? %>
+  <ul>
+  <% @recipe.ingredients.each() do |ingredient| %>
+    <li><%= ingredient.name %> </li>
+  <% end %>
+  </ul>
+<% else %>
+  <p><strong>Recipe does not have ingredients yet.</strong></p>
+  <br>
+  <p><a href="/ingredients">Add ingredients to database</a></p>
+<% end %>
 
+<h4>Assign an ingredient to this recipe:</h4>
+<form id="update_ingredient_id" action="/recipes/<%= @recipe.id() %>/ingredient" method="post">
+  <input name="_method" type="hidden" value="patch">
+  <input type="hidden" name="recipe_id" id="recipe_id" value="<%= @recipe.id() %>">
+  <label for="recipe_select">Select the Ingredient:  </label>
+    <br>
+  <select id="ingredient_id" name="ingredient_id">
+    <% @ingredients.each() do |ingredient| %>
+      <option value="<%= ingredient.id() %>"><%= ingredient.name() %></option>
+    <% end %>
+  </select>
+  <button type="submit">Submit</button>
+</form>
 
+<hr>
 
 <hr>
 <h3>Tags for this Recipe:</h3>
-<ul>
-<% if @recipe.tags.each() do |tag| %>
+<% if @recipe.tags.any?() %>
+  <ul>
+<% @recipe.tags.each() do |tag| %>
  <li><a href="/tags/<%= tag.id() %>"></a> <%= tag.description %> </li>
 <% end %>
 </ul>
@@ -17,11 +44,11 @@
     <p><a href="/tags">Add a tag to the database</a></p>
 <% end %>
 
-<h4>Assign recipe to a tag:</h4>
+<h4>Assign tag to this recipe:</h4>
 <form id="update_tag_id" action="/recipes/<%= @recipe.id() %>" method="post">
   <input name="_method" type="hidden" value="patch">
   <input type="hidden" name="recipe_id" id="recipe_id" value="<%= @recipe.id() %>">
-  <label for="recipe_select">Select the Recipe:  </label>
+  <label for="recipe_select">Select the Tag:  </label>
     <br>
   <select id="tag_id" name="tag_id">
     <% @tags.each() do |tag| %>
