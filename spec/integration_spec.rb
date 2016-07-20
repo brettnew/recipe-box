@@ -9,4 +9,11 @@ describe('recipe functionality through application', {:type => :feature}) do
     expect(page).to have_content('Ceaser Salad')
   end
 
+  it('allows a user to view details for single recipe') do
+    visit('/recipes')
+    fill_in('recipe_name', :with => 'Caesar Salad')
+    click_button('Add Recipe')
+    click_link('Caesar Salad')
+    expect(page).to have_content('Recipe: Caesar Salad')
+  end
 end
