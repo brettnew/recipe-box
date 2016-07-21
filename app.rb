@@ -95,6 +95,14 @@ patch('/recipes/:id') do
   redirect back
 end
 
+patch('/recipes/:id/rating') do
+  rating = params.fetch("rating").to_i()
+  @recipe = Recipe.find(params.fetch("id").to_i())
+  @recipe.update({:rating => rating})
+  @recipes = Recipe.all()
+  redirect back
+end
+
 get('/tags/:id/edit') do
   @tag = Tag.find(params.fetch("id").to_i())
   erb(:tag_update)

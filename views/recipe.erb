@@ -1,4 +1,9 @@
 <h2>Recipe: <%= @recipe.name() %></h2>
+
+<% if @recipe.rating.is_a? Integer %>
+<h3>Rating: <%= @recipe.rating() %> out of 5 stars </h3>
+<% end %>
+
 <hr>
 <h3>Ingredients for this Recipe:</h3>
 <% if @recipe.ingredients.any? %>
@@ -76,4 +81,21 @@
     <% end %>
   </select>
   <button type="submit">Submit Tag</button>
+</form>
+<br>
+<hr>
+<h4>Rate this recipe:</h4>
+<form id="rating" action="/recipes/<%= @recipe.id() %>/rating" method="post">
+  <input name="_method" type="hidden" value="patch">
+  <input type="hidden" name="recipe_id" id="recipe_id" value="<%= @recipe.id() %>">
+  <label for="recipe_select">Rate 1-5:  </label>
+    <br>
+  <select id="rating" name="rating">
+      <option value=1>1</option>
+      <option value=2>2</option>
+      <option value=3>3</option>
+      <option value=4>4</option>
+      <option value=5>5</option>
+  </select>
+  <button type="submit">Submit Rating</button>
 </form>
