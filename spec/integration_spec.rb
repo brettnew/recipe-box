@@ -90,12 +90,13 @@ describe('recipe functionality through application', {:type => :feature}) do
     expect(page).to have_content('jelly donuts')
   end
 
-  it('allows the user to edit a recipes ingredients') do
-    Recipe.create({:instructions => "bake it"})
+  it('allows the user to edit a recipes instructions') do
+    Recipe.create({:name => "donuts", :instructions => "bake it", :id => 1})
     visit('/recipes')
     click_link ('Edit')
-    fill_in('recipe_name', :with => "bake 20 mins")
+    fill_in('instructions', :with => "bake 20 mins")
     click_button ('Update Instructions')
+    click_link ('donuts')
     expect(page).to have_content('bake 20 mins')
   end
 end
