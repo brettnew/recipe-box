@@ -104,12 +104,24 @@ patch('/tags/:id/edit') do
   description = params.fetch("tag_description")
   @tag = Tag.find(params.fetch("id").to_i())
   @tag.update({:description => description})
+  redirect ('/tags')
 end
 
 delete('/tags/:id') do
   @tag = Tag.find(params.fetch("id").to_i())
   @tag.destroy()
   redirect('/tags')
+end
+
+get('/recipes/:id/edit') do
+  @recipe = Recipe.find(params.fetch("id").to_i())
+  erb(:recipe_update)
+end
+
+delete('/recipes/:id') do
+  @recipe = Recipe.find(params.fetch("id").to_i())
+  @recipe.destroy()
+  redirect('/recipes')
 end
 
 get("/clear") do

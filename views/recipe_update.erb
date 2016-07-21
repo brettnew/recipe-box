@@ -1,0 +1,16 @@
+<h1>Rename <%=@recipe.name() %> </h1>
+
+<form action="/recipes/<%= @recipe.id() %>/edit" method="post">
+  <input name="_method" type="hidden" value="patch">
+
+  <label for="recipe_name">Rename your recipe:</label>
+  <input id="recipe_name" name="recipe_name" type="text">
+
+  <button type="submit">Update</button>
+</form>
+
+<form action="/recipes/<%= @recipe.id() %>" method="post">
+  <input name="_method" type="hidden" value="delete">
+  <h5>Delete <%= @recipe.name %>?</h5>
+  <button type="submit">Delete Recipe</button>
+</form>

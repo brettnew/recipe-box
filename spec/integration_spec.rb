@@ -72,4 +72,12 @@ describe('recipe functionality through application', {:type => :feature}) do
     click_link('chicken')
     expect(page).to have_content('congee')
   end
+
+  it('allows the user to delete a recipe') do
+    Recipe.create({:name => "Hamburger"})
+    visit('/recipes')
+    click_link ('Edit')
+    click_button ('Delete Recipe')
+    expect(page).to have_no_content('Hamburger')
+  end
 end
