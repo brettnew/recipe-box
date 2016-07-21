@@ -21,4 +21,10 @@ it('has ingredients associated with it') do
     recipe = Recipe.new({:name => ""})
     expect(recipe.save()).to(eq(false))
   end
+
+  it("capitalizes first letter of each word in recipe") do
+    recipe = Recipe.create({:name => 'choco cookie'})
+    expect(recipe.name()).to(eq("Choco Cookie"))
+
+  end
 end

@@ -51,7 +51,7 @@ describe('recipe functionality through application', {:type => :feature}) do
     fill_in('ingredient_name', :with => "chicken")
     click_button('Add Ingredient')
     click_link('View Recipes')
-    click_link('congee')
+    click_link('Congee')
     select("chicken", :from => "ingredient_id")
     click_button("Submit Ingredient")
     expect(page).to have_content('chicken')
@@ -65,12 +65,12 @@ describe('recipe functionality through application', {:type => :feature}) do
     fill_in('ingredient_name', :with => "chicken")
     click_button('Add Ingredient')
     click_link('View Recipes')
-    click_link('congee')
+    click_link('Congee')
     select('chicken', :from => 'ingredient_id')
     click_button('Submit Ingredient')
     click_link('View Ingredients')
     click_link('chicken')
-    expect(page).to have_content('congee')
+    expect(page).to have_content('Congee')
   end
 
   it('allows the user to delete a recipe') do
@@ -87,7 +87,7 @@ describe('recipe functionality through application', {:type => :feature}) do
     click_link ('Edit')
     fill_in('recipe_name', :with => "jelly donuts")
     click_button ('Update')
-    expect(page).to have_content('jelly donuts')
+    expect(page).to have_content('Jelly Donuts')
   end
 
   it('allows the user to edit a recipes instructions') do
@@ -96,7 +96,7 @@ describe('recipe functionality through application', {:type => :feature}) do
     click_link ('Edit')
     fill_in('instructions', :with => "bake 20 mins")
     click_button ('Update Instructions')
-    click_link ('donuts')
+    click_link ('Donuts')
     expect(page).to have_content('bake 20 mins')
   end
 
@@ -104,7 +104,7 @@ describe('recipe functionality through application', {:type => :feature}) do
     Recipe.create({:name => "donuts"})
     Ingredient.create({:name => "butter"})
     visit('/recipes')
-    click_link('donuts')
+    click_link('Donuts')
     select('butter', :from => 'ingredient_id')
     click_button('Submit Ingredient')
     click_link('View Recipes')
