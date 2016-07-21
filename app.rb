@@ -25,8 +25,14 @@ end
 
 post("/recipes") do
   name = params.fetch("recipe_name")
-  Recipe.create({:name => name})
-  redirect("/recipes")
+  recipe = Recipe.new({:name => name, :id => nil})
+  @recipe = recipe
+  @recipes = Recipe.all()
+  if recipe.save()
+    redirect("/recipes")
+  else
+    erb(:recipe_errors)
+  end
 end
 
 post("/tags") do

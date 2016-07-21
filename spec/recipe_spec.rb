@@ -16,4 +16,9 @@ it('has ingredients associated with it') do
   test_recipe.update({:ingredient_ids => [ingredient1.id(), ingredient2.id()]})
   expect(test_recipe.ingredients()).to(eq([ingredient1, ingredient2]))
   end
+
+  it('validates presence of recipes') do
+    recipe = Recipe.new({:name => ""})
+    expect(recipe.save()).to(eq(false))
+  end
 end

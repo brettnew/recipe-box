@@ -64,6 +64,11 @@ describe('recipe functionality through application', {:type => :feature}) do
     click_link('View Ingredients')
     fill_in('ingredient_name', :with => "chicken")
     click_button('Add Ingredient')
+    click_link('View Recipes')
+    click_link('congee')
+    select('chicken', :from => 'ingredient_id')
+    click_button('Submit Ingredient')
+    click_link('View Ingredients')
     click_link('chicken')
     expect(page).to have_content('congee')
   end
