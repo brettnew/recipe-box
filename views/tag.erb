@@ -1,8 +1,9 @@
 <h2>Tag: <%= @tag.description() %></h2>
 <hr>
 <h3>Recipes for this Tag:</h3>
+<% if @tag.recipes.any?() %>
 <ul>
-<% if @tag.recipes.each() do |recipe| %>
+<% @tag.recipes.each() do |recipe| %>
  <li><a href="/recipes/<%= recipe.id() %>"></a> <%= recipe.name %> </li>
 <% end %>
 </ul>

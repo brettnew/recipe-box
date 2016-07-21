@@ -26,7 +26,7 @@ describe('recipe functionality through application', {:type => :feature}) do
     click_button('Add Recipe')
     click_link('Apple Pie')
     select("desert", :from => "tag_id")
-    click_button("Submit")
+    click_button("Submit Tag")
     expect(page).to have_content('desert')
   end
 
@@ -43,5 +43,28 @@ describe('recipe functionality through application', {:type => :feature}) do
     expect(page).to have_content('Pasta Salad')
   end
 
-  it('allows a user to associate a ')
+  it('allows a user to associate an ingredient with a recipe') do
+    visit('/recipes')
+    fill_in('recipe_name', :with => "congee")
+    click_button('Add Recipe')
+    click_link('View Ingredients')
+    fill_in('ingredient_name', :with => "chicken")
+    click_button('Add Ingredient')
+    click_link('View Recipes')
+    click_link('congee')
+    select("chicken", :from => "ingredient_id")
+    click_button("Submit Ingredient")
+    expect(page).to have_content('chicken')
+  end
+
+  it('allows a user to see recipes assoiciated with an ingredient') do
+    visit('/recipes')
+    fill_in('recipe_name', :with => "congee")
+    click_button('Add Recipe')
+    click_link('View Ingredients')
+    fill_in('ingredient_name', :with => "chicken")
+    click_button('Add Ingredient')
+    click_link('chicken')
+    expect(page).to have_content('congee')
+  end
 end

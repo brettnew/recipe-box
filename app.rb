@@ -54,10 +54,10 @@ get("/tags/:id") do
   erb(:tag)
 end
 
-get('/ingredients/id') do
+get('/ingredients/:id') do
   @ingredient = Ingredient.find(params.fetch("id").to_i())
   @recipes = Recipe.all()
-  erb(:recipe)
+  erb(:ingredient)
 end
 
 patch("/recipes/:id/ingredient") do
