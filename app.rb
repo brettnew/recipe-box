@@ -73,7 +73,7 @@ patch("/recipes/:id/ingredient") do
   redirect back
 end
 
-patch("/recipes/:id") do
+patch("/recipes/:id/tag") do
   tag = Tag.find(params.fetch("tag_id").to_i())
   @recipe = Recipe.find(params.fetch("id").to_i())
   @recipe.tags.push(tag)
@@ -87,7 +87,13 @@ patch("/tags/:id") do
   redirect back
 end
 
-
+patch('/recipes/:id') do
+  instructions = params.fetch("instructions")
+  @recipe = Recipe.find(params.fetch("id").to_i())
+  @recipe.update({:instructions => instructions})
+  @recipes = Recipe.all()
+  redirect back
+end
 
 
 

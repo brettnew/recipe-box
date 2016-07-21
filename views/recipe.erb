@@ -29,6 +29,26 @@
 
 <hr>
 
+<h3>Instructions for this recipe:</h3>
+
+<% if @recipe.instructions.nil?() %>
+
+<h4>There are no instructions for this recipe yet; please add them below:</h4>
+<form action="/recipes/<%= @recipe.id() %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <label for="instructions">Enter Instructions below</label>
+  <br>
+  <textarea name="instructions" rows="6" cols="40" id="instructions"></textarea>
+  <br>
+  <button type="submit">Submit Instructions</button>
+</form>
+
+<% else %>
+
+<p><%= @recipe.instructions() %></p>
+
+<% end %>
+
 <hr>
 <h3>Tags for this Recipe:</h3>
 <% if @recipe.tags.any?() %>
@@ -45,7 +65,7 @@
 <% end %>
 
 <h4>Assign tag to this recipe:</h4>
-<form id="update_tag_id" action="/recipes/<%= @recipe.id() %>" method="post">
+<form id="update_tag_id" action="/recipes/<%= @recipe.id() %>/tag" method="post">
   <input name="_method" type="hidden" value="patch">
   <input type="hidden" name="recipe_id" id="recipe_id" value="<%= @recipe.id() %>">
   <label for="recipe_select">Select the Tag:  </label>
