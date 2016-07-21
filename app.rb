@@ -25,7 +25,7 @@ end
 
 post("/recipes") do
   name = params.fetch("recipe_name")
-  recipe = Recipe.new({:name => name, :id => nil})
+  recipe = Recipe.new({:name => name, :rating => 0, :id => nil})
   @recipe = recipe
   @recipes = Recipe.all()
   if recipe.save()

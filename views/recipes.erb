@@ -13,8 +13,12 @@
 
   <% @recipes.order('rating DESC').each() do |recipe| %>
 
-  <li><a href="/recipes/<%= recipe.id() %>"><%= recipe.name() %></a> <strong><%= recipe.rating() %> stars</strong><br><a href="/recipes/<%= recipe.id() %>/edit">Edit</a></li>
-
+  <li><a href="/recipes/<%= recipe.id() %>"><%= recipe.name() %></a>
+    <% if recipe.rating == 0 %>
+      <strong>Unrated<strong><br><a href="/recipes/<%= recipe.id() %>/edit">Edit</a></li>
+    <% else %>
+       <strong><%= recipe.rating() %> stars</strong><br><a href="/recipes/<%= recipe.id() %>/edit">Edit</a></li>
+     <% end %>
   <% end %>
 
 </ul>
