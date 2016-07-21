@@ -15,6 +15,17 @@
   <button type="submit">Delete Recipe</button>
 </form>
 
+<form id="delete_ingredient" action="/recipes/<%= @recipe.id() %>/ingredient" method="post" >
+  <input type="hidden" name="_method" value="delete">
+<label for="recipe_select">Select the Ingredient:  </label>
+  <br>
+<select id="ingredient_id" name="ingredient_id">
+  <% @recipe.ingredients.each() do |ingredient| %>
+    <option value="<%= ingredient.id() %>"><%= ingredient.name() %></option>
+  <% end %>
+</select>
+<button type="submit">Delete Ingredient</button>
+</form>
 
 <form action="/recipes/<%= @recipe.id() %>/instructions" method="post">
   <input type="hidden" name="_method" value="patch" >

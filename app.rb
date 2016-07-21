@@ -138,6 +138,13 @@ delete('/recipes/:id') do
   redirect('/recipes')
 end
 
+delete('/recipes/:id/ingredient') do
+  recipe = Recipe.find(params.fetch("id").to_i())
+  ingredient = Ingredient.find(params.fetch('ingredient_id').to_i())
+  recipe.ingredients.destroy(ingredient)
+  redirect('/recipes')
+end
+
 get("/clear") do
   Tag.all().each() do |tag|
     tag.destroy()

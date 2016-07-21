@@ -91,12 +91,26 @@ describe('recipe functionality through application', {:type => :feature}) do
   end
 
   it('allows the user to edit a recipes instructions') do
-    Recipe.create({:name => "donuts", :instructions => "bake it", :id => 1})
+    Recipe.create({:name => "donuts", :instructions => "bake it"})
     visit('/recipes')
     click_link ('Edit')
     fill_in('instructions', :with => "bake 20 mins")
     click_button ('Update Instructions')
     click_link ('donuts')
     expect(page).to have_content('bake 20 mins')
+  end
+
+  it('allows the user to delete an ingredient') do
+    Recipe.create({:name => "donuts"})
+    Ingredient.create({:name => "butter"})
+    visit('/recipes')
+    click_link('donuts')
+    select('butter', :from => 'ingredient_id')
+    click_button('Submit Ingredient')
+    click_link('View Recipes')
+    click_link('Edit')
+    select('butter', :from => 'ingredient_id')
+    click_button('Delete Ingredient')
+    expect(page).to have_no_content('butter')
   end
 end
