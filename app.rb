@@ -107,6 +107,20 @@ patch('/tags/:id/edit') do
   redirect ('/tags')
 end
 
+patch('/recipes/:id/edit') do
+  name = params.fetch("recipe_name")
+  @recipe = Recipe.find(params.fetch("id").to_i())
+  @recipe.update({:name => name})
+  redirect ('/recipes')
+end
+
+patch('/recipes/:id/instructions') do
+  instructions = params.fetch('instructions')
+  @recipe = Recipe.find(params.fetch("id").to_i())
+  @recipe.update({:instructions => instructions})
+  redirect('/recipes')
+end
+
 delete('/tags/:id') do
   @tag = Tag.find(params.fetch("id").to_i())
   @tag.destroy()

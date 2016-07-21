@@ -80,4 +80,22 @@ describe('recipe functionality through application', {:type => :feature}) do
     click_button ('Delete Recipe')
     expect(page).to have_no_content('Hamburger')
   end
+
+  it('allows the user to edit a recipes name') do
+    Recipe.create({:name => "donuts"})
+    visit('/recipes')
+    click_link ('Edit')
+    fill_in('recipe_name', :with => "jelly donuts")
+    click_button ('Update')
+    expect(page).to have_content('jelly donuts')
+  end
+
+  it('allows the user to edit a recipes ingredients') do
+    Recipe.create({:instructions => "bake it"})
+    visit('/recipes')
+    click_link ('Edit')
+    fill_in('recipe_name', :with => "bake 20 mins")
+    click_button ('Update Instructions')
+    expect(page).to have_content('bake 20 mins')
+  end
 end

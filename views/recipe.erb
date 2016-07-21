@@ -35,7 +35,7 @@
 
 <h4>There are no instructions for this recipe yet; please add them below:</h4>
 <form action="/recipes/<%= @recipe.id() %>" method="post">
-  <input type="hidden" name="_method" value="patch">
+  <input type="hidden" name="_method" value="patch" >
   <label for="instructions">Enter Instructions below</label>
   <br>
   <textarea name="instructions" rows="6" cols="40" id="instructions"></textarea>

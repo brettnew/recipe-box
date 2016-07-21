@@ -14,3 +14,13 @@
   <h5>Delete <%= @recipe.name %>?</h5>
   <button type="submit">Delete Recipe</button>
 </form>
+
+
+<form action="/recipes/<%= @recipe.id() %>" method="post">
+  <input type="hidden" name="_method" value="patch" >
+  <label for="instructions">Enter Instructions below</label>
+  <br>
+  <textarea name="instructions" rows="6" cols="40" id="instructions"><%= @recipe.instructions() %></textarea>
+  <br>
+  <button type="submit">Update Instructions</button>
+</form>
