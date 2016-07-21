@@ -11,9 +11,9 @@
 <p>Click on a recipe's name to view recipes and to add new ingredients and instructions OR click 'Edit' to edit recipe name or instructions, or to delete entire recipe. </p>
 <ul>
 
-  <% @recipes.each() do |recipe| %>
+  <% @recipes.order('rating DESC').each() do |recipe| %>
 
-  <li><a href="/recipes/<%= recipe.id() %>"><%= recipe.name() %></a> <a href="/recipes/<%= recipe.id() %>/edit">Edit</a></li>
+  <li><a href="/recipes/<%= recipe.id() %>"><%= recipe.name() %></a> <strong><%= recipe.rating() %> stars</strong><br><a href="/recipes/<%= recipe.id() %>/edit">Edit</a></li>
 
   <% end %>
 
