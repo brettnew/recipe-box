@@ -95,8 +95,22 @@ patch('/recipes/:id') do
   redirect back
 end
 
+get('/tags/:id/edit') do
+  @tag = Tag.find(params.fetch("id").to_i())
+  erb(:tag_update)
+end
 
+patch('/tags/:id/edit') do
+  description = params.fetch("tag_description")
+  @tag = Tag.find(params.fetch("id").to_i())
+  @tag.update({:description => description})
+end
 
+delete('/tags/:id') do
+  @tag = Tag.find(params.fetch("id").to_i())
+  @tag.destroy()
+  redirect('/tags')
+end
 
 get("/clear") do
   Tag.all().each() do |tag|

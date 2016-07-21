@@ -13,7 +13,7 @@
 
   <% @tags.each() do |tag| %>
 
-  <li><a href="/tags/<%= tag.id() %>"><%= tag.description() %></a></li>
+  <li><a href="/tags/<%= tag.id() %>"><%= tag.description() %></a> <a href="/tags/<%= tag.id() %>/edit">Edit</a></li>
 
   <% end %>
 
