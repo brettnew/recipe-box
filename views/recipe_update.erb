@@ -16,7 +16,7 @@
 </form>
 
 
-<form action="/recipes/<%= @recipe.id() %>" method="post">
+<form action="/recipes/<%= @recipe.id() %>/instructions" method="post">
   <input type="hidden" name="_method" value="patch" >
   <label for="instructions">Enter Instructions below</label>
   <br>
